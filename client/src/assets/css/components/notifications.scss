@@ -1,0 +1,56 @@
+@use '../variables';
+
+.notifications-main{
+    
+    
+    .notifications{
+        #no-notifications{
+            text-align: center;
+            font-size: 1.25rem;
+            color: variables.$shadow-color;
+
+        }
+        .notification-container{
+            height: 80vh;
+            width: 80%;
+            display: flex;  
+            flex-direction: row;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-left: auto;
+            margin-right: auto;
+            overflow-y: scroll;
+            align-content: flex-start;
+
+
+            .notification{
+                background-color: variables.$grey;
+                border-radius: 1rem;
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+                width: 100%;
+                border-bottom: 1px solid variables.$grey;
+                img{
+                    width: 10vw;
+                }
+                p{
+                    font-size: 1.2rem;
+                    color: variables.$dark;
+                }
+                .timestamp{
+                    font-size: 1rem;
+                    color: variables.$dark;
+                }
+                h3{
+                    font-size: 1.5rem;
+                    color: variables.$dark;
+                    font-weight: bold;
+                }
+            }
+
+        }
+    }
+
+}

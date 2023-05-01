@@ -1,0 +1,12 @@
+@import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@200&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap");
+main {
+  overflow: hidden;
+}
+main.launch .map {
+  display: grid;
+  height: 200vh;
+  width: 200vh;
+}
+
+/*# sourceMappingURL=index.css.map */

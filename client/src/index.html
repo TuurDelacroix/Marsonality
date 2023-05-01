@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Mars 14: Marsonality</title>
+    <link rel="stylesheet" href="assets/css/reset.css">
+    <link rel="stylesheet" href="assets/css/main.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@200&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" >
+    <script src="https://kit.fontawesome.com/d786ec7c75.js" crossorigin="anonymous"></script>
+    <!-- Config  -->
+    <script src="assets/js/api/load-config.js"></script>
+    <!-- Functionalities  -->
+    <script src="assets/js/helpers/uni.js"></script>
+    <script src="assets/js/api.js"></script>
+    <script src="assets/js/api/storage.js"></script>
+    <!-- Page Loading  -->
+    <script src="assets/js/page-loading/index.js"></script>
+    <!-- Page Specific Functionalities -->
+    <script src="assets/js/index/maps.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ol@v7.1.0/ol.css">
+    <script src="https://cdn.jsdelivr.net/npm/ol@v7.1.0/dist/ol.js"></script>
+    <script src="assets/js/helpers/subscriptionhandler.js"></script>
+    <script src="assets/js/helpers/pop-up.js"></script>
+
+</head>
+<body>
+<main class="launch">
+    <img src="assets/media/brand.png" alt="brand">
+    <button id="start-button">START</button>
+    <div>
+        <div style="height: 65vh; width: 90vw" id="marsMap" hidden></div>
+        <em id="user" class="fa-solid fa-location-dot" style="font-size: 2rem; color: royalblue; text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;"></em>
+        <em id="building" class="fa-regular fa-building" style="font-size: 2rem; background-color: lightgray; border-radius: 5px"></em>
+    </div>
+</main>
+<div id="alert">
+    <dialog id="confirm-popup">
+        <form method="dialog">
+            <!-- Not valid approved by JVD on 2022-11-10 on Teams, reference https://github.com/validator/validator/issues/962 -->
+            <h2 class="title">Popup Title</h2>
+            <p></p>
+            <div class="buttons">
+                <button type="submit" class="deny" id="deny" value="false"></button>
+                <button type="submit" class="accept" id="accept" value="true"></button>
+            </div>
+        </form>
+    </dialog>
+    <dialog id="alert-popup">
+        <form method="dialog">
+            <!-- Not valid approved by JVD on 2022-11-10 on Teams, reference https://github.com/validator/validator/issues/962 -->
+            <h2 class="title">Popup Title</h2>
+            <p></p>
+            <button type="submit" class="accept" value="true"></button>
+        </form>
+    </dialog>
+    <dialog id="input-popup">
+        <form method="dialog">
+            <!-- Not valid approved by JVD on 2022-11-10 on Teams, reference https://github.com/validator/validator/issues/962 -->
+            <h2 class="title">Popup Title</h2>
+            <p id="errormessage" hidden></p>
+            <p id="description"></p>
+            <label for="inputField"></label>
+            <input type="text" id="inputField" maxlength="25">
+            <button type="submit" class="accept" value="true"></button>
+        </form>
+    </dialog>
+</div>
+</body>
+</html>

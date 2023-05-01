@@ -1,0 +1,8 @@
+.idea
+package-lock.json
+node_modules
+.scannerwork
+/src/config.js
+.vscode/settings.json
+
+.DS_Store

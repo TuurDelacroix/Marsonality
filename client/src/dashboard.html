@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Mars 14: Marsonality</title>
+    <link rel="stylesheet" href="assets/css/reset.css">
+    <link rel="stylesheet" href="assets/css/main.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@200&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" >
+    <script src="https://kit.fontawesome.com/d786ec7c75.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Config  -->
+    <script src="assets/js/api/load-config.js"></script>
+    <!-- POC Current Martian  -->
+    <script src="assets/js/api/storage.js"></script>
+    <!-- API Methods  -->
+    <script src="assets/js/api.js" defer></script>
+    <!-- Functionalities  -->
+    <script src="assets/js/helpers/dragdrop.js"></script>
+    <script src="assets/js/helpers/pop-up.js"></script>
+    <script src="assets/js/helpers/uni.js"></script>
+    <script src="assets/js/helpers/carrousel-control.js"></script>
+    <!-- Data Renderers -->
+    <!-- General -->
+    <script src="assets/js/renderers/dashboard/box-info.js"></script>
+    <script src="assets/js/renderers/dashboard/table-data.js"></script>
+    <!-- Profile(s) -->
+    <script src="assets/js/renderers/profiles/manager.js"></script>
+    <script src="assets/js/renderers/profiles/carrousel.js"></script>
+    <!-- Trait(s) -->
+    <script src="assets/js/renderers/traits/owned-traits.js"></script>
+    <!-- Chart(s) -->
+    <script src="assets/js/renderers/statistics/charts.js"></script>
+    <script src="assets/js/renderers/statistics/fullscreen.js"></script>
+    <!-- Notifications -->
+    <script src="assets/js/renderers/notifications/notifications.js"></script>
+    <!-- Page Loading  -->
+    <script src="assets/js/page-loading/dashboard.js"></script>
+    <script src="assets/js/renderers/traits/shop.js"></script>
+
+
+</head>
+
+<body>
+<section id="sidebar">
+    <a href="#" class="brand">
+        <h2 hidden>|</h2>
+        <img src="assets/media/brand.png" alt="brand" title="brand">
+    </a>
+    <ul class="side-menu top">
+        <li class="active">
+            <a href="#" data-class=".dashboard-main">
+                <em class="fa-solid fa-grip-vertical"></em>
+                <span class="tait-column-title">Dashboard</span>
+            </a>
+        </li>
+        <li>
+            <a href="#" data-class=".profiles-main">
+                <em class="fa-solid fa-users"></em>
+                <span class="tait-column-title">Profiles</span>
+            </a>
+        </li>
+        <li>
+            <a href="#" data-class=".traits-main">
+                <em class="fas fa-brain"></em>
+                <span class="tait-column-title">My Traits</span>
+            </a>
+        </li>
+        <li>
+            <a href="#" data-class=".trait-shop-main">
+                <em class="fa-solid fa-shopping-bag"></em>
+                <span class="tait-column-title">Trait Shop</span>
+            </a>
+        </li>
+        <li>
+            <a href="#" data-class=".statistics">
+                <em class="fas fa-chart-line"></em>
+                <span class="tait-column-title">Statistics</span>
+            </a>
+        </li>
+    </ul>
+</section>
+<main>
+    <section id="content">
+        <h6 hidden>© All rights served</h6>
+        <nav>
+            <a href="#" class="notifications">
+                <em class='fas fa-bell'></em>
+                <span class="circle"></span>
+            </a>
+
+            <a href="#" class="profile">
+                <img src="assets/images/people.png" alt="" title="">
+            </a>
+        </nav>
+
+        <div class="head-title">
+            <div class="left">
+                <h1>Dashboard</h1>
+                <ul class="small-nav">
+                    <li>
+                        <a href="#">Dashboard</a>
+                    </li>
+                    <li><em class='fas fa-chevron-right'></em></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="dashboard-main" data-crumb-info="Dashboard@Overview@">
+
+            <ul class="box-info-head">
+                <li>
+                    <em class="fas fa-check"></em>
+                    <div class="tait-column-title" data-info="currentProfileName">
+                        <h2>CURRENT ACTIVE PROFILE</h2>
+                        <p></p>
+                    </div>
+                </li>
+            </ul>
+            <ul class="box-info">
+                <li>
+                    <em class="fa-solid fa-circle-nodes"></em>
+                    <div class="tait-column-title" data-info="numberOfProfiles">
+                        <h2>NUMBER OF PROFILES</h2>
+                        <p></p>
+                    </div>
+                </li>
+                <li>
+                    <em class="fa-solid fa-circle-nodes"></em>
+                    <div class="tait-column-title" data-info="numberOfTraits">
+                        <h2>NUMBER OF TRAITS</h2>
+                        <p><a id="default-num-traits"> </a> - <span id="add-num-traits"></span></p>
+                    </div>
+                </li>
+                <li>
+                    <em class="fa-solid fa-circle-nodes"></em>
+                    <div class="tait-column-title" data-info="mostUsedProfile">
+                        <h2>MOST USED PROFILE</h2>
+                        <p></p>
+                    </div>
+                </li>
+            </ul>
+
+            <div class="table-data">
+                <div class="trait-info">
+                    <div class="head">
+                        <h3> TRAIT INFORMATION</h3>
+                    </div>
+                    <ul class="traits">
+                        <li>
+                            <a class="collapsible">
+                                <p>Positive Traits</p>
+                                <em class='fas fa-plus'></em>
+                            </a>
+                            <div class="trait-list" data-collabsible-type="positive">
+                                <ul></ul>
+                            </div>
+                        </li>
+                        <li>
+                            <a class="collapsible">
+                                <p>Neutral Traits</p>
+                                <em class='fas fa-plus'></em>
+                            </a>
+                            <div class="trait-list" data-collabsible-type="neutral">
+                                <ul></ul>
+                            </div>
+                        </li>
+                        <li>
+                            <a class="collapsible">
+                                <p>Negative Traits</p>
+                                <em class='fas fa-plus'></em>
+                            </a>
+                            <div class="trait-list" data-collabsible-type="negative">
+                                <ul></ul>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="profiles-main" data-crumb-info="Profiles@Overview@" hidden>
+            <div class="profiles">
+                <em class="fas fa-arrow-right l-button c-button"></em>
+                <em class="fas fa-arrow-right r-button c-button"></em>
+                <div class="profiles-carrousel">
+
+                </div>
+            </div>
+        </div>
+
+        <div class="profile-manager" data-class=".profile-manager" hidden>
+            <div class="profile-view">
+                <div class="profile-image">
+                    <h2 class="profile-image-title">.</h2>
+                    <img src="#" alt="#" title="#">
+                    <button id="activate-profile">
+                        Activate
+                    </button>
+                </div>
+                <div class="trait-info">
+                    <h2 class="trait-info-title">Trait Information</h2>
+                    <div class="base">
+                        <h3 class="trait-info-title"><em class="fas fa-lock"></em> Base</h3>
+                        <ul class="trait-list">
+                        </ul>
+                    </div>
+                    <div class="additional">
+                        <h3 class="trait-info-title">Additional <span id="trait-total"></span></h3>
+                        <ul id="additional" class="trait-list dragdrop-container drop-container">
+                            <li class="trait-name drag-here">Drag here</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="drag-status">
+                    <em id="arrow-right-drag" class="fa-solid fa-forward"></em>
+                    <em id="arrow-left-drag" class="fa-solid fa-backward"></em>
+                </div>
+                <div class="owned-traits">
+                    <h2 class="trait-info-title">Owned Traits</h2>
+                    <ul id="owned" class="trait-list dragdrop-container drop-container"></ul>
+                </div>
+            </div>
+            <button class="back-to-overview">
+                Go Back
+            </button>
+        </div>
+
+        <div class="traits-main" data-crumb-info="Traits@Owned@" hidden>
+            <ul class="trait-column">
+                <li>
+                    <div class="tait-column-title" data-info="ownedPositiveTraits">
+                        <h3>POSITIVE</h3>
+                        <p>Total: <span id="pos-trait-total"></span></p>
+
+                    </div>
+                    <div class="form-part">
+                        <form id="search-in-positive-traits">
+                            <label for="pos-trait-name" hidden></label>
+                            <input type="text" id="pos-trait-name" placeholder="Type here...">
+                            <em class="fas fa-search"></em>
+                        </form>
+                    </div>
+
+                    <div class="trait-list" data-owned-traitlist="pos">
+                        <ul>
+
+                        </ul>
+                    </div>
+                </li>
+
+                <li>
+                    <div class="tait-column-title" data-info="ownedNeutralTraits">
+                        <h3>NEUTRAL</h3>
+                        <p>Total: <span id="neu-trait-total"></span></p>
+
+                    </div>
+                    <div class="form-part">
+                        <form id="search-in-neutral-traits">
+                            <label for="neu-trait-name" hidden></label>
+                            <input type="text" id="neu-trait-name" placeholder="Type here...">
+                            <em class="fas fa-search"></em>
+                        </form>
+                    </div>
+
+                    <div class="trait-list" data-owned-traitlist="neu">
+                        <ul>
+
+                        </ul>
+                    </div>
+                </li>
+
+                <li>
+                    <div class="tait-column-title" data-info="ownedNegativeTraits">
+                        <h3>NEGATIVE</h3>
+                        <p>Total: <span id="neg-trait-total"></span></p>
+                    </div>
+                    <div class="form-part">
+                        <form id="search-in-negative-traits">
+                            <label for="neg-trait-name" hidden></label>
+                            <input type="text" id="neg-trait-name" placeholder="Type here...">
+                            <em class="fas fa-search"></em>
+                        </form>
+                    </div>
+
+                    <div class="trait-list" data-owned-traitlist="neg">
+                        <ul>
+
+                        </ul>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+        <div class="trait-shop-main" data-crumb-info="Shop@All-Traits@" hidden>
+            <ul class="trait-column">
+                <li>
+                    <div class="tait-column-title" data-info="ownedPositiveTraits">
+                        <h3>POSITIVE</h3>
+                        <p>Total: <span id="pos-trait-total-shop"></span></p>
+
+                    </div>
+                    <div class="form-part">
+                        <form id="search-in-positive-traits-shop">
+                            <label for="pos-trait-name" hidden></label>
+                            <input type="text" id="pos-trait-name-shop" placeholder="Type here...">
+                            <em class="fas fa-search"></em>
+                        </form>
+                    </div>
+
+                    <div class="trait-list" data-shop-traitlist="pos">
+                        <ul>
+
+                        </ul>
+                    </div>
+                </li>
+
+                <li>
+                    <div class="tait-column-title" data-info="ownedNeutralTraits">
+                        <h3>NEUTRAL</h3>
+                        <p>Total: <span id="neu-trait-total-shop"></span></p>
+
+                    </div>
+                    <div class="form-part">
+                        <form id="search-in-neutral-traits-shop">
+                            <label for="neu-trait-name" hidden></label>
+                            <input type="text" id="neu-trait-name-shop" placeholder="Type here...">
+                            <em class="fas fa-search"></em>
+                        </form>
+                    </div>
+
+                    <div class="trait-list" data-shop-traitlist="neu">
+                        <ul>
+
+                        </ul>
+                    </div>
+                </li>
+
+                <li>
+                    <div class="tait-column-title" data-info="ownedNegativeTraits">
+                        <h3>NEGATIVE</h3>
+                        <p>Total: <span id="neg-trait-total-shop"></span></p>
+                    </div>
+                    <div class="form-part">
+                        <form id="search-in-negative-traits-shop">
+                            <label for="neg-trait-name" hidden></label>
+                            <input type="text" id="neg-trait-name-shop" placeholder="Type here...">
+                            <em class="fas fa-search"></em>
+                        </form>
+                    </div>
+
+                    <div class="trait-list" data-shop-traitlist="neg">
+                        <ul>
+
+                        </ul>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+        <div class="notifications-main" hidden>
+            <div class="notifications">
+                <h2 id="no-notifications" hidden>No notification yet</h2>
+                <ul class="notification-container">
+                </ul>
+            </div>
+        </div>
+
+        <div class="statistics" data-crumb-info="Statistics@Overview@">
+            <div class="graph-display">
+                <canvas id="profile-usage-chart"></canvas>
+            </div>
+            <div class="graph-display">
+                <canvas id="trait-distribution-chart"></canvas>
+            </div>
+        </div>
+    </section>
+    <div id="alert">
+        <dialog id="confirm-popup">
+            <form method="dialog">
+                <!-- Not valid approved by JVD on 2022-11-10 on Teams, reference https://github.com/validator/validator/issues/962 -->
+                <h2 class="title">Popup Title</h2>
+                <p></p>
+                <div class="buttons">
+                    <button type="submit" class="deny" id="deny" value="false"></button>
+                    <button type="submit" class="accept" id="accept" value="true"></button>
+                </div>
+            </form>
+        </dialog>
+        <dialog id="alert-popup">
+            <form method="dialog">
+                <!-- Not valid approved by JVD on 2022-11-10 on Teams, reference https://github.com/validator/validator/issues/962 -->
+                <h2 class="title">Popup Title</h2>
+                <p></p>
+                <button type="submit" class="accept" value="true"></button>
+            </form>
+        </dialog>
+        <dialog id="input-popup">
+            <form method="dialog">
+                <!-- Not valid approved by JVD on 2022-11-10 on Teams, reference https://github.com/validator/validator/issues/962 -->
+                <h2 class="title">Popup Title</h2>
+                <p id="errormessage" hidden></p>
+                <p id="description"></p>
+                <label for="inputField"></label>
+                <input type="text" id="inputField" maxlength="25">
+                <button type="submit" class="accept" value="true"></button>
+            </form>
+        </dialog>
+    </div>
+    <template id="profile-card-template">
+        <div class="profile-card">
+            <div class="image-content">
+                <div class="card-content">
+                    <h2 class="profile-title"></h2>
+                </div>
+                <div class="card-image">
+                    <img src="" alt="" title="">
+                </div>
+            </div>
+            <div class="card-content">
+                <h2>Traits</h2>
+                <div class="trait-list">
+                    <ul>
+                        <li class="trait-name"></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </template>
+    <template id="locked-profile-card-template">
+        <div class="profile-card locked">
+            <img src="./assets/media/locked.png" alt="" title="Unlock profile">
+        </div>
+    </template>
+    <template id="notification-template">
+        <li class="notification"> <!-- //NOSONAR -->
+            <h3></h3>
+            <p></p>
+            <p class="timestamp"></p>
+            <img src="" alt="">
+        </li>
+    </template>
+</main>
+</body>
+
+</html>

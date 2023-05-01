@@ -1,0 +1,20 @@
+.dragdrop-container {
+  margin: 1rem 0 1rem 0;
+  padding: 1rem;
+  background-color: #eee;
+}
+
+.draggable-trait {
+  padding: 1rem;
+  margin: 0.5rem 0 0.5rem 0;
+  background-color: #fff;
+  border: 0.0125rem solid black;
+  cursor: move;
+}
+
+.draggable-trait.dragging {
+  opacity: 0.5;
+  background-color: #eeeeee;
+}
+
+/*# sourceMappingURL=trait-selection.css.map */

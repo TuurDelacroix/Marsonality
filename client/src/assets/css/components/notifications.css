@@ -1,0 +1,47 @@
+@import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@200&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap");
+.notifications-main .notifications #no-notifications {
+  text-align: center;
+  font-size: 1.25rem;
+  color: #bebcbb;
+}
+.notifications-main .notifications .notification-container {
+  height: 80vh;
+  width: 80%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-left: auto;
+  margin-right: auto;
+  overflow-y: scroll;
+  align-content: flex-start;
+}
+.notifications-main .notifications .notification-container .notification {
+  background-color: #f2f2f2;
+  border-radius: 1rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  border-bottom: 1px solid #f2f2f2;
+}
+.notifications-main .notifications .notification-container .notification img {
+  width: 10vw;
+}
+.notifications-main .notifications .notification-container .notification p {
+  font-size: 1.2rem;
+  color: #342E37;
+}
+.notifications-main .notifications .notification-container .notification .timestamp {
+  font-size: 1rem;
+  color: #342E37;
+}
+.notifications-main .notifications .notification-container .notification h3 {
+  font-size: 1.5rem;
+  color: #342E37;
+  font-weight: bold;
+}
+
+/*# sourceMappingURL=notifications.css.map */

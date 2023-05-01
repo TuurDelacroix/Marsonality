@@ -1,0 +1,230 @@
+@use '../variables';
+
+// Navigations
+
+section {
+  &#sidebar {
+    // Positioning
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 17.5rem;
+    height: 100%;
+
+    // Style
+    background-color: variables.$light;
+    font-family: variables.$lato-font;
+    z-index: 2000;
+
+    // Extra
+    transition: .3s ease;
+    overflow-x: hidden;
+    scrollbar-width: none;
+
+    &.hide {
+      width: 3.75rem;
+  }
+
+    &.hide ~ #content {
+      width: calc(100% - 3.75rem);
+      left: 3.75rem;
+  }
+
+    .brand {
+      // Positioning
+      top: 0;
+      left: 0;
+      z-index: 500;
+      padding: 1rem 0.5rem 0.5rem 0.5rem;
+      height: 3.4rem;
+
+      display: flex;
+      align-items: center;
+      position: sticky;
+
+      box-sizing: content-box;
+
+      // Style
+      font-size: variables.$bigger-size;
+      font-weight: 700;
+      color: variables.$primary-color;
+      background-color: variables.$light;
+
+      // Logo
+      img {
+        width: 100%;
+    }
+  }
+
+    .side-menu {
+      width: 100%;
+      margin-top: 3rem;
+
+      li {
+        height: 3rem;
+        background-color: transparent;
+        padding: 0.25rem;
+        border-radius: 3rem 0 0 3rem;
+
+        a {
+          width: 100%;
+          height: 100%;
+          background-color: variables.$light;
+          display: flex;
+          align-items: center;
+          border-radius: 2.8rem;
+          font-size: 1rem;
+          color: variables.$dark;
+          white-space: nowrap;
+
+          em {
+            margin: 0 0.5rem 0 0;
+          }
+
+          &:before {
+            content: '';
+            margin: 0 0 0 1.5rem;
+          }
+        }
+
+        &.active {
+          background-color: variables.$grey;
+          position: relative;
+
+          a {
+            color: variables.$primary-color;
+          }
+
+          &::before {
+            @include variables.beforeAndAfterForSidebar;
+            top: -2.5rem;
+            box-shadow: 1.25rem 1.25rem 0 variables.$grey;
+          }
+
+          &::after {
+            @include variables.beforeAndAfterForSidebar;
+            bottom: -2.5rem;
+            box-shadow: 1.25rem -1.25rem 0 variables.$grey;
+          }
+
+      }
+    }
+
+      &.top {
+        li {
+          a {
+            &:hover {
+              color: variables.$primary-color;
+          }
+        }
+      }
+    }
+
+  }
+
+}
+
+  &.hide ~ #content {
+    .side-menu {
+      li {
+        a {
+          width: 4rem;
+          transition: width .3s ease;
+      }
+    }
+  }
+}
+
+  &#content {
+    position: relative;
+    width: calc(100% - 17.5rem);
+    left: 17.5rem;
+    transition: .3s ease;
+
+    nav {
+      height: 3.5rem;
+      background-color: variables.$light;
+      padding: 0 1.5rem;
+      display: flex;
+      align-items: center;
+      grid-gap: 1.5rem;
+      font-family: variables.$lato-font;
+      position: sticky;
+      z-index: 1000;
+      justify-content: space-between;
+
+      #navigation-items {
+        display: flex;
+        align-items: center;
+        position: sticky;
+        grid-gap: 1.5rem;
+    }
+
+      a {
+        color: variables.$dark;
+    }
+
+      em {
+        cursor: pointer;
+        color: variables.$dark;
+
+        &:hover {
+          color: variables.$secondary-color;
+      }
+    }
+
+      .nav-link {
+        font-size: 1rem;
+        transition: .3s ease;
+
+        &:hover {
+          cursor: pointer;
+          color: variables.$primary-color;
+      }
+    }
+
+      .profile {
+        img {
+          width: 2.25rem;
+          height: 2.25rem;
+          object-fit: cover;
+          border-radius: 50%;
+        }
+      }
+
+      .notifications {
+        font-size: 1.25rem;
+        position: relative;
+
+        .circle {
+          font-size: 0.75rem;
+          position: absolute;
+          top: -0.375rem;
+          right: -0.375rem;
+          width: 0.75rem;
+          height: 0.75rem;
+          border-radius: 50%;
+          border: 0.125rem solid variables.$light;
+          background-color: indianred;
+          color: variables.$grey;
+          font-weight: 700;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+      }
+
+
+      &::before {
+        content: '';
+        position: absolute;
+        width: 2.5rem;
+        height: 2.5rem;
+        bottom: -2.5rem;
+        left: 0;
+        border-radius: 50%;
+        box-shadow: -1.5rem -1.5rem 0 variables.$light;
+    }
+  }
+}
+}

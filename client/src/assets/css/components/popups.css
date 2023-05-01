@@ -1,0 +1,34 @@
+@import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@200&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap");
+dialog {
+  font-family: "Calibri Light", sans-serif;
+  font-size: 1.2rem;
+  color: #eb6e3f;
+  border: 0.5rem #bebcbb;
+  border-radius: 1rem;
+  position: unset;
+  padding: 1.5rem;
+}
+
+form[method=dialog] {
+  line-height: 1.5rem;
+}
+form[method=dialog] .buttons {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-content: space-between;
+}
+form[method=dialog] .buttons button {
+  padding: 0.5rem;
+  margin: 0.5rem 0 0 0;
+  text-align: center;
+}
+form[method=dialog] h2 {
+  font-size: 1.8rem;
+}
+form[method=dialog] p {
+  color: black;
+}
+
+/*# sourceMappingURL=popups.css.map */

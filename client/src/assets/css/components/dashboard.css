@@ -1,0 +1,17 @@
+@import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@200&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Poppins:wght@400;500;600;700&display=swap");
+body section #sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 17.5rem;
+  height: 100%;
+  font-family: "Lato", sans-serif;
+}
+body section #sidebar.hide ~ #content {
+  width: calc(100% - 60px);
+  left: 3.75rem;
+}
+
+/*# sourceMappingURL=dashboard.css.map */

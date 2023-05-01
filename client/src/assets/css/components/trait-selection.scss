@@ -1,0 +1,14 @@
+@use '../variables';
+
+.draggable-trait {
+    cursor: move;
+
+    &:hover {
+        color: variables.$primary-color;
+        font-weight: 600;
+    }
+}
+
+.drop-container--over {
+    opacity: 0.5;
+}

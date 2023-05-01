@@ -1,0 +1,30 @@
+@use '../variables';
+
+@mixin add-flex {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-items: center;
+}
+
+header {
+    @include add-flex;
+    img {
+        height: 8rem;
+        width: max-content;
+    }
+
+    #system-navigation {
+        text-align: center;
+        p {
+            padding: 0 0 2rem 0;
+            font-size: 1rem;
+
+            span {
+                font-family: variables.$boldy-font;
+                color: variables.$primary-color;
+            }
+        }
+    }
+
+}

@@ -1,0 +1,1 @@
+{"version":3,"sourceRoot":"","sources":["../variables.scss","notifications.scss"],"names":[],"mappings":"AAuBQ;AACA;AClBA;EACI;EACA;EACA,ODFG;;ACKP;EACI;EACA;EACA;EACA;EACA;EACA;EACA;EACA;EACA;EACA;;AAGA;EACI,kBDZT;ECaS;EACA;EACA;EACA;EACA;EACA;EACA;;AACA;EACI;;AAEJ;EACI;EACA,ODtBb;;ACwBS;EACI;EACA,OD1Bb;;AC4BS;EACI;EACA,OD9Bb;EC+Ba","file":"notifications.css"}

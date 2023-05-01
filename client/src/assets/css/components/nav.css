@@ -1,0 +1,162 @@
+@import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@200&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap");
+section#sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 17.5rem;
+  height: 100%;
+  background-color: #F9F9F9;
+  font-family: "Lato", sans-serif;
+  z-index: 2000;
+  transition: 0.3s ease;
+  overflow-x: hidden;
+  scrollbar-width: none;
+}
+section#sidebar.hide {
+  width: 3.75rem;
+}
+section#sidebar.hide ~ #content {
+  width: calc(100% - 3.75rem);
+  left: 3.75rem;
+}
+section#sidebar .brand {
+  top: 0;
+  left: 0;
+  z-index: 500;
+  padding: 1rem 0.5rem 0.5rem 0.5rem;
+  height: 3.4rem;
+  display: flex;
+  align-items: center;
+  position: sticky;
+  box-sizing: content-box;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #eb6e3f;
+  background-color: #F9F9F9;
+}
+section#sidebar .brand img {
+  width: 100%;
+}
+section#sidebar .side-menu {
+  width: 100%;
+  margin-top: 3rem;
+}
+section#sidebar .side-menu li {
+  height: 3rem;
+  background-color: transparent;
+  padding: 0.25rem;
+  border-radius: 3rem 0 0 3rem;
+}
+section#sidebar .side-menu li a {
+  width: 100%;
+  height: 100%;
+  background-color: #F9F9F9;
+  display: flex;
+  align-items: center;
+  border-radius: 2.8rem;
+  font-size: 1rem;
+  color: #342E37;
+  white-space: nowrap;
+}
+section#sidebar .side-menu li a i {
+  margin: 0 0.5rem 0 0;
+}
+section#sidebar .side-menu li a:before {
+  content: "";
+  margin: 0 0 0 1.5rem;
+}
+section#sidebar .side-menu li.active {
+  background-color: #f2f2f2;
+  position: relative;
+}
+section#sidebar .side-menu li.active a {
+  color: #eb6e3f;
+}
+section#sidebar .side-menu li.active::before {
+  position: absolute;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  right: 0;
+  box-shadow: 1.25rem 1.25rem 0 #f2f2f2;
+  z-index: -1;
+  top: -2.5rem;
+}
+section#sidebar .side-menu li.active::after {
+  position: absolute;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  right: 0;
+  box-shadow: 1.25rem 1.25rem 0 #f2f2f2;
+  z-index: -1;
+  bottom: -2.5rem;
+}
+section#sidebar .side-menu.top li a:hover {
+  color: #eb6e3f;
+}
+section.hide ~ #content .side-menu li a {
+  width: 4rem;
+  transition: width 0.3s ease;
+}
+section#content {
+  position: relative;
+  width: calc(100% - 17.5rem);
+  left: 17.5rem;
+  transition: 0.3s ease;
+}
+section#content nav {
+  height: 3.5rem;
+  background-color: #F9F9F9;
+  padding: 0 1.5rem;
+  display: flex;
+  align-items: center;
+  grid-gap: 1.5rem;
+  font-family: "Lato", sans-serif;
+  position: sticky;
+  z-index: 1000;
+  justify-content: space-between;
+}
+section#content nav #navigation-items {
+  display: flex;
+  align-items: center;
+  position: sticky;
+  grid-gap: 1.5rem;
+}
+section#content nav a {
+  color: #342E37;
+}
+section#content nav i {
+  cursor: pointer;
+  color: #342E37;
+}
+section#content nav i:hover {
+  color: #ee7f42;
+}
+section#content nav .nav-link {
+  font-size: 1rem;
+  transition: 0.3s ease;
+}
+section#content nav .nav-link:hover {
+  cursor: pointer;
+  color: #eb6e3f;
+}
+section#content nav .profile img {
+  width: 2.25rem;
+  height: 2.25rem;
+  object-fit: cover;
+  border-radius: 50%;
+}
+section#content nav::before {
+  content: "";
+  position: absolute;
+  width: 2.5rem;
+  height: 2.5rem;
+  bottom: -2.5rem;
+  left: 0;
+  border-radius: 50%;
+  box-shadow: -1.5rem -1.5rem 0 #F9F9F9;
+}
+
+/*# sourceMappingURL=nav.css.map */

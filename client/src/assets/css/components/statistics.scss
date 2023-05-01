@@ -1,0 +1,59 @@
+@use '../variables';
+
+.statistics {
+    @include variables.sectionDivisionPlacing;
+    padding-top: 0;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+
+    .material-icons {
+        &.hidden {
+            display: none;
+        }
+
+        &:last-of-type {
+            color: white;
+        }
+
+        &:hover {
+            cursor: pointer;
+        }
+    }
+
+    .graph-display {
+        width: 70%;
+        background-color: variables.$light;
+        padding: 1rem;
+
+        &:fullscreen {
+            display: flex;
+            justify-content: center;
+            justify-items: center;
+            flex-direction: column;
+            padding: 10rem;
+            position: relative;
+            background-color: variables.$d-grey;
+
+            .material-icons {
+                font-size: 3.5rem;
+                position: absolute;
+                top: 1rem;
+                right: 1rem;
+            }
+        }
+
+        &:first-of-type {
+            margin-bottom: 2rem;
+        }
+
+        &:last-of-type {
+            width: 50%;
+        }
+    }
+
+    canvas {
+        background-color: variables.$light;
+        border-radius: 0.75rem;
+    }
+}

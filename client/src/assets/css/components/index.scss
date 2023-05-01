@@ -1,0 +1,13 @@
+@use '../variables';
+
+main {
+
+    overflow: hidden;
+    &.launch {
+        .map {
+            display: grid;
+            height: 200vh;
+            width: 200vh;
+        }
+    }
+}

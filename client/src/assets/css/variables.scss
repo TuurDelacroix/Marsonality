@@ -1,0 +1,127 @@
+
+// House Brand
+$primary-color: rgb(235, 110, 63);
+$secondary-color: #ee7f42;
+$ternary-color: rgba(238, 127, 66, 0.93);
+
+$accent-color: #554942;
+$shadow-color: #bebcbb;
+
+$title-color: #333333;
+
+$segment-background-color: #fcfcfc;
+
+$light: #eeeeee;
+$grey: #f2f2f2;
+$d-grey: #AAAAAA;
+$l-dark: #342E37C1;
+$dark: #342E37;
+$yellow: #FFCE26;
+$l-green: #ff9a43;
+// Margins
+
+// Font(s)
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@200&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap');
+
+$poppins: 'Poppins', sans-serif;
+$lato-font: 'Lato', sans-serif;
+$marsonality-font: 'Nunito Sans', "Calibri Light", sans-serif;
+$boldy-font: 'Fredoka One', cursive;
+$big-title: 'Calibri', sans-serif;
+$normal-title: 'Calibri Light', sans-serif;
+$button-font: Helvetica, Arial, sans-serif;
+
+// Font(s) Sizes
+$small-size: 0.5rem;
+$smaller-size: 0.8rem;
+$normal-size: 1.2rem;
+$regular-size: 1rem;
+$bigger-size: 1.5rem;
+$big-size: 1.8rem;
+
+// Static values
+$number-of-profiles: 42;
+
+// Mixins
+@mixin add-vertical-flex {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-items: center;
+}
+
+@mixin add-horizontal-flex {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: space-between;
+    gap: 20rem;
+}
+
+@mixin bigTitle {
+    // TODO: Find better font for title instead of Calibri of Boldy
+    font-family: $boldy-font;
+    font-size: $big-size;
+    color: $primary-color;
+    //text-shadow: 1px 3px 4px rgb(190, 188, 187);
+}
+
+@mixin smallerTitle {
+    // TODO: Find better font for title instead of Calibri of Boldy
+    margin: 0.5rem 0 0.5rem 0;
+    font-family: $marsonality-font;
+    font-size: $normal-size;
+    color: $secondary-color;
+    //text-shadow: 1px 3px 4px rgb(190, 188, 187);
+}
+
+@mixin popupStyle {
+    font-family: $normal-title;
+    font-size: $normal-size;
+    color: $secondary-color;
+    border: 0.5rem $shadow-color;
+    border-radius: 1rem;
+    position: unset;
+    padding: 1.5rem;
+}
+
+@mixin normalButton {
+    background-color: rgba(51, 51, 51, 0.05);
+    border-radius: 0.125rem;
+    color: $title-color;
+    cursor: pointer;
+    display: inline-block;
+    font-family: $button-font;
+    font-size: $smaller-size;
+    margin: 0.250rem;
+    padding: 10px 12px;
+    text-align: center;
+}
+
+@mixin beforeAndAfterForSidebar {
+    content: "";
+    position: absolute;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 50%;
+    right: 0;
+    z-index: -1;
+}
+
+@mixin sectionDivisionPlacing {
+    width: auto;
+    padding: 1.5rem 2.25rem 1.5rem 2.25rem;
+    font-family: $marsonality-font;
+    max-height: calc(100vh - 3.5rem);
+    overflow-y: auto;
+}
+
+@mixin traitListWithOverflow {
+    text-align: center;
+    padding: 0 1rem;
+    border-radius: 0.8rem;
+    overflow: auto;
+    width: 90%;
+    background-color: $grey;
+}

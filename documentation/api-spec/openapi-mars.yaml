@@ -1,0 +1,902 @@
+openapi: 3.0.3
+info:
+  title: 'Marsonality'
+  description: 'At Marsonality the aim is to help curious and insecure people to become a better version of themselves by giving them the opportunity to change their personal traits.'
+  version: 1.0.0
+servers:
+  - url: https://project-ii.ti.howest.be/mars-14
+    description: 'Public API'
+  - url: http://localhost:8080/
+    description: 'Local API'
+paths:
+  /api/martians:
+    get:
+      description: Get all the martians registered in our company
+      operationId: getMartians
+      tags:
+        - Martians
+      responses:
+        201:
+          description: Received
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/martianSet'
+        404:
+          description: "No martians in the company"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+
+  /api/martians/{marsId}:
+    get:
+      description: Get a martian with a provided marsId
+      operationId: getMartian
+      tags:
+        - Martians
+      parameters:
+        - name: marsId
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        201:
+          description: Received
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/martianSet'
+        404:
+          description: "This martian is no customer of your company"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'                
+
+  /api/profiles:
+    get:
+      description: Get all profiles
+      operationId: getProfiles
+      tags:
+        - Profiles
+      responses:
+        201:
+          description: Received
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/profileSet'
+        404:
+          description: "There are no profiles"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+
+  /api/martians/traits:
+    put:
+      description: Add all the traits of the owned profiles to the table with all owned traits
+      operationId: setTraitsOfMartians
+      security:
+          - userAuth: []
+      tags:
+        - Traits
+      responses:
+        '201':
+          description: Received
+          content:
+            application/json:
+              schema:
+                type: object
+                example: {"message": "Added successfully"}
+  /api/martians/{marsId}/traits:
+    get:
+      description: Get all the owned traits of a martian (without their default ones)
+      operationId: getTraitsOfMartian
+      tags:
+        - Traits
+      parameters:
+        - name: marsId
+          in: path
+          required: true
+          schema:
+            type: integer
+        - name: traitType
+          in: query
+          required: false
+          schema:
+            type: string
+            enum: [POSITIVE, NEUTRAL, NEGATIVE]
+      responses:
+        '201':
+          description: Received
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/traitSet'
+    post:
+      description: "Buy a new trait"
+      operationId: buyNewTrait
+      security:
+          - userAuth: []
+      tags:
+        - Traits
+      parameters:
+        - name: marsId
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                quote:
+                  type: string
+              required:
+                - name
+            examples:
+              buy-kind-trait:
+                value:
+                  name: Kind
+      responses:
+        '201':
+          description: Trait bought
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/trait'
+        '404':
+          description: "There are no profiles"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+  /api/martians/{marsId}/profiles:
+    get:
+      description: Get all profiles of a specific martian
+      operationId: getProfilesOfMartian
+      tags:
+        - Profiles
+      parameters:
+        - name: marsId
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '201':
+          description: Received
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/profileSet'
+        404:
+          description: "This martian has no profiles"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'                
+    post:
+      description: Unlock a profile
+      operationId: unlockProfile
+      security:
+          - userAuth: []
+      tags:
+        - Profiles
+      parameters:
+        - name: marsId
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                profileName:
+                  type: string
+              required:
+                - profileName
+            examples:
+              Profile1:
+                value:
+                  profileName: Happy Hans
+                description: Hans Zimmer really wants the ability to be a happier person
+          text/plain:
+            schema:
+              type: string
+              example: "If everybody minded their own business, the world would go around a great deal faster than it does."
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                type: object
+                example: {message: "Profile 1 Unlocked!"}
+        404:
+          description: "Error unlocking the profile"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+
+  /api/martians/{marsId}/profiles/active:
+    get:
+      description: Get the active profile of a specific martian
+      operationId: getActiveProfileOfMartian
+      tags:
+        - Profiles
+      parameters:
+        - name: marsId
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '201':
+          description: Received
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/profile'
+        404:
+          description: "This martian has no active profile"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+
+  /api/martians/{marsId}/profiles/{profileName}:
+    get:
+      description: Get a known profile of a specific martian
+      operationId: getProfileOfMartian
+      tags:
+        - Profiles
+      parameters:
+        - name: marsId
+          in: path
+          required: true
+          schema:
+            type: integer
+        - name: profileName
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '201':
+          description: Received
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/profile'
+        404:
+          description: "Profile can't be found (with this name) in the profiles of this martian"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'                
+
+  /api/martians/{marsId}/profiles/{profileName}/traits:
+    get:
+      description: Get the traits of a specific profile of a specific martian
+      operationId: getTraitsOfMartiansProfile
+      tags:
+        - Traits
+      parameters:
+      - name: marsId
+        in: path
+        required: true
+        schema:
+          type: integer
+      - name: profileName
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '201':
+          description: Received
+          content:
+            application/json:
+              schema:
+                  $ref: '#/components/schemas/traitSet'
+        404:
+          description: "Couldn't find the traits of the given profile of a martian"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+  
+  /api/martians/{marsId}/profiles/{profileName}/trait:
+    post:
+      description: Add a trait to a profile
+      operationId: addTraitToProfile
+      security:
+          - userAuth: []
+      tags:
+        - Traits
+      parameters:
+        - name: marsId
+          in: path
+          required: true
+          schema:
+            type: integer
+        - name: profileName
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - name
+            examples:
+              buy-kind-trait:
+                value:
+                  name: Kind
+      responses:
+        '201':
+          description: Trait successfully added to profile
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/trait'
+        '404':
+          description: Failed to add trait to profile
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+    delete:
+      description: Remove a trait from a profile
+      operationId: removeTraitFromProfile
+      security:
+          - userAuth: []
+      tags:
+        - Traits
+      parameters:
+        - name: marsId
+          in: path
+          required: true
+          schema:
+            type: integer
+        - name: profileName
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - name
+            examples:
+              buy-kind-trait:
+                value:
+                  name: Kind
+      responses:
+        '201':
+          description: Trait successfully removed from profile
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/trait'
+        '404':
+          description: Failed to remove trait from profile
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+  /api/martians/{marsId}/profiles/default:
+    get:
+      description: Get the default (real personality) of a specific martian
+      operationId: getDefaultProfileOfMartian
+      tags:
+        - Profiles
+      parameters:
+        - name: marsId
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '201':
+          description: Received
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/profile'
+        404:
+          description: "The initial profile of the customer can't be found"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+                
+  /api/martians/{marsId}/profiles/usages:
+    get:
+      description: Get the usages of all owned profiles
+      operationId: getProfilesUsage
+      tags:
+        - Profiles
+      parameters:
+        - name: marsId
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '201':
+          description: Received
+          content:
+            application/json:
+              schema:
+                type: object
+                example: {"Happy Hans": 5, "Sad Hans": 2}
+        404:
+          description: "The usages for the user's profiles can't be found"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+
+  /api/profiles/{profileName}:
+    get:
+      description: Get a profile with a known name
+      operationId: getProfile
+      tags:
+        - Profiles
+      parameters:
+        - name: profileName
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        201:
+          description: Received
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/profile'
+        404:
+          description: "There were no chips found"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+  /api/martians/{marsId}/profiles/{profileName}/activate:
+    put:
+      description: Activate a profile of a Martians
+      operationId: activateProfile
+      security:
+          - userAuth: []
+      tags:
+        - Profiles
+      parameters:
+        - name: marsId
+          in: path
+          required: true
+          schema:
+            type: integer
+        - name: profileName
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        201: 
+          description: Active profile changed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/profile'
+        404:
+          description: Failed to change active profile
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+  /api/traits:
+    get:
+      description: Get all personality traits
+      operationId: getTraits
+      tags:
+        - Traits
+      parameters:
+        - name: traitType
+          in: query
+          required: false
+          schema:
+            type: string
+            enum: [POSITIVE, NEUTRAL, NEGATIVE]
+      responses:
+        201:
+          description: Received
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/traitSet'
+        404:
+          description: "Oops, all the traits are gone"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+  /api/traits/{marsId}:
+    get:
+      description: Get all the initial personality traits of a martians default profile
+      operationId: getDefaultTraitsOfMartian
+      tags:
+        - Traits
+      parameters:
+        - name: marsId
+          in: path
+          required: true
+          schema:
+            type: number
+      responses:
+        201:
+          description: Received
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/traitSet'
+        404:
+          description: "The person has no traits by default :("
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+  /api/trait/{traitName}:
+    get:
+      description: Get a trait by its name
+      operationId: getTrait
+      tags:
+        - Traits
+      parameters:
+        - name: traitName
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        201:
+          description: Received
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/trait'
+        404:
+          description: "Failed to get trait"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+  /api/chips:
+    get:
+      description: Get all chips with their owner
+      operationId: getChips
+      tags:
+        - Chips
+      responses:
+        201:
+          description: Received
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/chipSet'
+        404:
+          description: "There were no chips found"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+  /api/chips/{marsId}:
+    get:
+      description: Get the chip-info of a specific martian
+      operationId: getChipOfMartian
+      tags:
+        - Chips
+      parameters:
+        - name: marsId
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '201':
+          description: Received
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/chip'
+        404:
+          description: "There were no chips found for this martian"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+    put:
+      description: Toggle the activation of the chip (activated/deactivated)
+      operationId: toggleChipActivation
+      security:
+          - userAuth: []
+      tags:
+        - Chips
+      parameters:
+        - in: path
+          name: marsId
+          required: true
+          schema:
+            type: integer
+          description: The martians marsId
+          example: 65
+      responses:
+        200:
+          description: Deleted
+          content:
+            application/json:
+              schema:
+                type: object
+                example: {message: "Chip has been deavtivated"}
+        404:
+          description: "There were no chips found"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+  /api/subscribe:
+    post:
+      description: subscribe to push notifications
+      operationId: postSubscription
+      security:
+          - userAuth: []
+      tags: 
+        - Subscriptions
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                endpoint:
+                  type: string
+                key:
+                  type: string
+                auth:
+                  type: string
+      responses:
+        '200':
+          description: OK
+        '401':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+  /api/notification:
+    post:
+      description: send a notification to all subscribed clients
+      operationId: postNotification
+      security:
+          - userAuth: []
+      tags: 
+        - Subscriptions
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/notification'
+      responses:
+        '200':
+          description: OK
+        '401':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+
+  /api/notifications:
+    get:
+      description: get a list off all notifications
+      operationId: getNotifications
+      tags: 
+        - Subscriptions
+      responses:
+        '200':
+          description: succes
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/notificationSet'
+
+        '401':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+
+components:
+  securitySchemes:
+      userAuth:
+          type: http
+          scheme: bearer
+  schemas:
+    martian:
+      type: object
+      properties:
+        marsId:
+          type: integer
+          example: 68 
+        firstname:
+          type: string
+        lastname:
+          type: string
+        age:
+          type: integer
+        birthdate:
+          type: string
+        chip:
+          $ref: '#/components/schemas/chip'
+        cooldown_started:
+          type: string
+          default: null
+      required:
+          - marsId
+      example:
+        marsId: 65
+        firstname: "Hans"
+        lastname: "Zimmer"
+        age: 65
+        birthdate: "12/09/1957"
+        chip: {activated: true}
+
+    profile:
+      type: object
+      properties:
+        name:
+          type: string
+        marsId:
+          $ref: '#/components/schemas/martian'
+        price:
+          type: integer
+          format: decimal
+        creation_date:
+          type: string
+          format: date
+        usages:
+          type: integer
+          default: null
+        used:
+          type: boolean
+          default: false
+        locked:
+          type: boolean
+          default: true
+        number_of_traits:
+          type: integer
+          default: 0
+        traits:
+          type: array
+          items:
+            $ref: '#/components/schemas/trait'
+      required:
+        - name
+        - marsId
+      example:
+        name: 'Happy Hans'
+        marsId: 65
+        price: 200
+        creation_date: "31/02/2023"
+        usages: 5
+        used: false
+        locked: false
+        number_of_traits: 1
+        traits:  [{name: "Asshole", "description": "You are such an ass", type: "NEGATIVE"}]
+    trait:
+      type: object
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        type:
+          type: string
+          enum: [POSITIVE, NEUTRAL , NEGATIVE]
+      required:
+        - name
+      example:
+        name: "Asshole"
+        description: "You are such an ass"
+        type: NEGATIVE
+    chip:
+      type: object
+      properties:
+        activated:
+          type: boolean
+      required:
+        - marsId
+      example:
+        activated: true
+    employee:
+      allOf:
+        - $ref: '#/components/schemas/martian'
+        - type: object
+          properties:
+            test:
+              type: string
+    chipSet:
+      type: array
+      items:
+        $ref: '#/components/schemas/chip'  
+    martianSet:
+      type: array
+      items:
+        $ref: '#/components/schemas/martian'
+    profileSet:
+      type: array
+      items:
+        $ref: '#/components/schemas/profile'
+    traitSet:
+      type: array
+      items:
+        $ref: '#/components/schemas/trait'
+    subscription:
+      type: object
+      properties:
+        endpoint:
+          type: string
+        key:
+          type: string
+        auth:
+          type: string
+    notification:
+      type: object
+      properties:
+        notification:
+          type: object
+          properties:
+            title:
+              type: string
+            options:
+              type: object
+    notificationSet:
+        type: array
+        items:
+          $ref: '#/components/schemas/notification'
+    error:
+      type: object
+      description:
+        All errors (non 2XX) responses have the same format and contain the following.
+        A `failure`, containing the HTTP-error code (same as in header).
+        A `cause` containing a description of what went wrong.
+        
+      properties:
+        failure:
+          type: integer
+        cause:
+          type: string
+      example: { "failure": 409 , "cause" : "You can only select another profile after the cooldown: 00:03:52" }

@@ -1,0 +1,214 @@
+@use '../variables';
+
+    a[href] {
+        text-decoration: none;
+        color: black;
+    }
+
+
+    a {
+        text-decoration: none;
+    }
+    ul {
+        li {
+            list-style: none;
+        }
+    }
+
+    .head-title {
+        @include variables.sectionDivisionPlacing;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        grid-gap: 1rem;
+
+        .left {
+            h1 {
+                font-size: 2.25rem;
+                font-weight: 600;
+                margin-bottom: 0.625rem;
+                color: variables.$dark;
+            }
+
+            .small-nav {
+                display: flex;
+                align-items: center;
+                grid-gap: 1rem;
+
+                li {
+                    color: variables.$dark;
+
+                    a {
+                        color: variables.$d-grey;
+                        pointer-events: none;
+
+                        &.active {
+                            color: variables.$primary-color;
+                            pointer-events: unset;
+                        }
+
+                    }
+
+                    //&::after {
+                    //    content: "<li><em class='fas fa-chevron-right'></em></li>"
+                    //}
+                }
+            }
+        }
+    }
+
+    div {
+
+        &.dashboard-main {
+            @include variables.sectionDivisionPlacing;
+            padding-top: 0;
+
+            .box-info, .box-info-head {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+                grid-gap: 1.5rem;
+                margin: 2.25rem 0 0 0;
+
+                li {
+                    padding: 1.5rem;
+                    background-color: variables.$light;
+                    border-radius: 1.25rem;
+                    display: flex;
+                    align-items: center;
+                    grid-gap: 1.5rem;
+
+                    em {
+                        // Style
+                        background-color: variables.$grey;
+                        color: variables.$primary-color;
+
+                        // Positioning
+                        width: 3.5rem;
+                        height: 3.5rem;
+                        border-radius: 0.625rem;
+                        font-size: variables.$big-size;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                    }
+
+                    .tait-column-title {
+                        h2 {
+                            font-family: variables.$lato-font;
+                            font-size: variables.$normal-size;
+                            font-weight: 600;
+                            color: variables.$secondary-color;
+                        }
+
+                        p {
+                            font-family: variables.$marsonality-font;
+                            font-weight: 750;
+                            color: variables.$l-dark;
+                        }
+                    }
+                }
+
+            }
+
+            .table-data {
+                display: flex;
+                flex-wrap: wrap;
+                grid-gap: 1.5rem;
+                margin: 1.5rem 0 0 0;
+                width: 100%;
+                color: variables.$dark;
+
+                .trait-info {
+                    flex-grow: 1;
+                    flex-basis: 18.75rem;
+
+                    h2 {
+                        font-family: variables.$lato-font;
+                        font-size: variables.$normal-size;
+                        font-weight: 600;
+                        color: variables.$secondary-color;
+                        margin: 0.5rem 0 0.5rem 0;
+                    }
+
+                    .traits {
+                        width: 100%;
+
+                        li {
+                            a {
+                                width: auto;
+                                margin: 0 0 0.5rem 0;
+                                background-color: variables.$grey;
+                                border-radius: 0.625rem;
+                                padding: 0.875rem 1.25rem;
+                                display: flex;
+                                justify-content: space-between;
+                                align-items: center;
+                            }
+
+                            .trait-list {
+                                margin: -1rem 0 1rem 0;
+                                border-radius: 0 0 1rem 1rem;
+                                padding: 1rem;
+                                background-color: variables.$grey;
+                                height: 5rem;
+                                overflow: auto;
+
+                                li.trait-name {
+                                    margin: 0 0 0 1.5rem;
+                                    list-style-type: circle;
+                                }
+                            }
+
+                        }
+
+                        .collapsible ~ .trait-list {
+                            display: none;
+                        }
+                    }
+                }
+            }
+        }
+
+    }
+
+
+// General
+
+.head {
+    display: flex;
+    align-items: center;
+    grid-gap: 1rem;
+    margin: 0 0 1.5rem 0;
+
+    h3 {
+        font-family: variables.$poppins;
+        margin: 0 auto 0 0;
+        font-size: variables.$normal-size;
+        font-weight: 600;
+    }
+
+    input[type="text"] {
+        border-radius: 2rem;
+        padding: 0.225rem 1rem 0 1rem;
+    }
+
+    em {
+        cursor: pointer;
+        color: variables.$primary-color;
+
+        &:hover {
+            color: variables.$dark;
+            transition: color .3s ease;
+        }
+    }
+}
+
+.table-data {
+    &> div {
+        border-radius: 1.25rem;
+        background-color: variables.$light;
+        padding: 1.5rem;
+        overflow-x: auto;
+    }
+}

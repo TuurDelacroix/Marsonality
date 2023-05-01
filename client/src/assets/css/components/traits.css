@@ -1,0 +1,18 @@
+@import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@200&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap");
+.traits-main {
+  width: auto;
+  padding: 1.5rem 2.25rem 1.5rem 2.25rem;
+  font-family: "Nunito Sans", "Calibri Light", sans-serif;
+  max-height: calc(100vh - 3.5rem);
+  overflow-y: auto;
+  padding-top: 0;
+}
+.traits-main .trait-column {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+  grid-gap: 1.5rem;
+  margin: 2.25rem 0 0 0;
+}
+
+/*# sourceMappingURL=traits.css.map */

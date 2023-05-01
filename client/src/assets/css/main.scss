@@ -1,0 +1,14 @@
+@use 'components/fonts';
+@use 'components/popups';
+
+@use 'components/header'; // TODO: rework the start page (if time left)
+
+@use 'components/dashboard';
+@use 'components/profiles';
+@use 'components/traits';
+@use 'components/statistics';
+@use 'components/notifications';
+
+@use 'components/nav';
+// TODO: USE COMPONENTS
+@use 'components/body';
